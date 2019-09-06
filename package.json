@@ -12,7 +12,12 @@
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.6.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "cors": "^2.8.5",
+    "graphql-yoga": "^1.18.3",
+    "helmet": "^3.21.0",
+    "morgan": "^1.9.1"
+  },
   "scripts": {
     "dev": "cd src && nodemon --exec ts-node index.ts -e ts,graphql"
   }
