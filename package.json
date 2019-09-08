@@ -8,6 +8,9 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^12.7.4",
+    "babel-runtime": "^6.26.0",
+    "gql-merge": "^0.0.6",
+    "graphql-to-typescript": "^0.1.2",
     "ts-node": "^8.3.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.6.2"
@@ -22,6 +25,8 @@
     "morgan": "^1.9.1"
   },
   "scripts": {
-    "dev": "cd src && nodemon --exec ts-node index.ts -e ts,graphql"
+    "dev": "cd src && nodemon --exec ts-node index.ts -e ts,graphql",
+    "pretypes": "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql",
+    "types": "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.ts"
   }
 }

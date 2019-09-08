@@ -8,7 +8,7 @@ class App {
   public app: GraphQLServer;
   constructor() {
     this.app = new GraphQLServer({
-      schema: schema
+      schema
     });
     this.middlewares();
   }
