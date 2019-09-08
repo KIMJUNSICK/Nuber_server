@@ -10,12 +10,12 @@ type User {
   phoneNumber: String
   verifiedPhoneNumber: Boolean!
   profilePhoto: String
-  createdAt: String!
-  updatedAt: String
   isDriving: Boolean!
   isRiding: Boolean!
   isTaken: Boolean!
   lastLongitude: Float
   lastLatitude: Float
   lastOrientation: Float
+  createdAt: String!
+  updatedAt: String
 }
