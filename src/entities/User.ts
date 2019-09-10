@@ -68,6 +68,10 @@ class User extends BaseEntity {
 
   @BeforeInsert()
   @BeforeUpdate()
+  private hashPassword = (password: string): Promise<string> => {
+    return bcrypt.hash(password, BCRYPT_ROUNDS);
+  };
+
   savePassword = async (): Promise<void> => {
     if (this.password) {
       const hashedPassword = await this.hashPassword(this.password);
@@ -77,10 +81,6 @@ class User extends BaseEntity {
 
   public comparePassword = (password: string): Promise<boolean> => {
     return bcrypt.compare(this.password, password);
-  };
-
-  private hashPassword = (password: string): Promise<string> => {
-    return bcrypt.hash(password, BCRYPT_ROUNDS);
   };
 }
 
