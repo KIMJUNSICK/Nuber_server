@@ -1,20 +1,22 @@
-import { IsEmail } from "class-validator";
 import bcrypt from "bcrypt";
+import { IsEmail } from "class-validator";
 import {
-  Entity,
   BaseEntity,
-  Column,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  CreateDateColumn,
   BeforeInsert,
   BeforeUpdate,
+  Column,
+  CreateDateColumn,
+  Entity,
   ManyToOne,
-  OneToMany
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
 } from "typeorm";
 
 import Chat from "./Chat";
 import Message from "./Message";
+import Ride from "./Ride";
+import Verification from "./Verification";
 
 const BCRYPT_ROUNDS = 10;
 
@@ -70,6 +72,15 @@ class User extends BaseEntity {
   @OneToMany(type => Message, message => message.user)
   messages: Message[];
 
+  @OneToMany(type => Verification, verification => verification.user)
+  verifications: Verification[];
+
+  @OneToMany(type => Ride, ride => ride.passenger)
+  ridesAsPassenger: Ride[];
+
+  @OneToMany(type => Ride, ride => ride.driver)
+  ridesAsDriver: Ride[];
+
   @CreateDateColumn() createdAt: string;
   @UpdateDateColumn() updatedAt: string;
 
@@ -79,8 +90,8 @@ class User extends BaseEntity {
 
   @BeforeInsert()
   @BeforeUpdate()
-  private hashPassword = (password: string): Promise<string> => {
-    return bcrypt.hash(password, BCRYPT_ROUNDS);
+  public comparePassword = (password: string): Promise<boolean> => {
+    return bcrypt.compare(this.password, password);
   };
 
   savePassword = async (): Promise<void> => {
@@ -90,8 +101,8 @@ class User extends BaseEntity {
     }
   };
 
-  public comparePassword = (password: string): Promise<boolean> => {
-    return bcrypt.compare(this.password, password);
+  private hashPassword = (password: string): Promise<string> => {
+    return bcrypt.hash(password, BCRYPT_ROUNDS);
   };
 }
 

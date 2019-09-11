@@ -4,7 +4,7 @@
     "exclude": ["config/**/*.js", "node_modules/**/*."]
   },
   "rules": {
-    "no-console": true,
+    "no-console": false,
     "member-access": false,
     "object-literal-sort-keys": false,
     "ordered-imports": true,
