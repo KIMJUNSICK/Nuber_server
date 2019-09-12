@@ -9,6 +9,6 @@ type Mutation {
     firstName: String!
     lastName: String!
     email: String
-    fbId: String
+    fbId: String!
   ): connectFacebookResponse!
 }
