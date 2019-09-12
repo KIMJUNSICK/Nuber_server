@@ -40,10 +40,10 @@ class User extends BaseEntity {
   @Column({ type: "int", nullable: true })
   age: number;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   password: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   phoneNumber: string;
 
   @Column({ type: "boolean", default: false })
@@ -91,12 +91,12 @@ class User extends BaseEntity {
     return `${this.firstName} ${this.lastName}`;
   }
 
-  @BeforeInsert()
-  @BeforeUpdate()
   public comparePassword = (password: string): Promise<boolean> => {
     return bcrypt.compare(this.password, password);
   };
 
+  @BeforeInsert()
+  @BeforeUpdate()
   savePassword = async (): Promise<void> => {
     if (this.password) {
       const hashedPassword = await this.hashPassword(this.password);
