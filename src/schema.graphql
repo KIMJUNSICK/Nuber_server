@@ -52,6 +52,13 @@ type connectFacebookResponse {
 
 type Mutation {
   ConnectFacebook(firstName: String!, lastName: String!, email: String, fbId: String!): connectFacebookResponse!
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse!
+}
+
+type EmailSignInResponse {
+  ok: Boolean!
+  error: String
+  token: String
 }
 
 type User {
