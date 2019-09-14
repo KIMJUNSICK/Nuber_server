@@ -1,6 +1,7 @@
 import { EmailSignInMutationArgs, EmailSignInResponse } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import User from "../../../entities/User";
+import generateToken from "../../../utils/generateToken";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -21,10 +22,11 @@ const resolvers: Resolvers = {
         // OOP & method
         const checkPassword = await user.comparePassword(password);
         if (checkPassword) {
+          const token = generateToken(user.id);
           return {
             ok: true,
             error: null,
-            token: "Coming soon!"
+            token
           };
         } else {
           return {

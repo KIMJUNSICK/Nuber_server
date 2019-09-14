@@ -1,6 +1,7 @@
-import { Resolvers } from "src/types/resolvers";
 import { EmailSignUpMutationArgs, EmailSignUpResponse } from "src/types/graph";
+import { Resolvers } from "src/types/resolvers";
 import User from "../../../entities/User";
+import generateToken from "../../../utils/generateToken";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -18,11 +19,12 @@ const resolvers: Resolvers = {
             token: null
           };
         } else {
-          await User.create({ ...args }).save();
+          const newUser = await User.create({ ...args }).save();
+          const token = generateToken(newUser.id);
           return {
             ok: true,
             error: null,
-            token: "Comming soon!"
+            token
           };
         }
       } catch (error) {

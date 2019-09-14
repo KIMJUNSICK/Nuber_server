@@ -5,6 +5,7 @@ import {
 import { Resolvers } from "src/types/resolvers";
 import User from "../../../entities/User";
 import Verification from "../../../entities/Verification";
+import generateToken from "../../../utils/generateToken";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -41,10 +42,11 @@ const resolvers: Resolvers = {
         if (user) {
           user.verifiedPhoneNumber = true;
           user.save();
+          const token = generateToken(user.id);
           return {
             ok: true,
             error: null,
-            token: "Comming Soon!"
+            token
           };
         } else {
           return {
