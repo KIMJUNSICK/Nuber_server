@@ -7,6 +7,12 @@ import { Resolvers } from "../../../types/resolvers";
 import generateToken from "../../../utils/generateToken";
 
 const resolvers: Resolvers = {
+  Query: {
+    something: (parent, args, context) => {
+      console.log(context.req.user);
+      return "";
+    }
+  },
   Mutation: {
     ConnectFacebook: async (
       _,
