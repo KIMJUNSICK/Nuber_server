@@ -14,7 +14,7 @@ const resolvers: Resolvers = {
     ): Promise<RequestEmailVerificationResponse> => {
       isAuthenticated(req);
       const user: User = req.user;
-      if (user.email) {
+      if (user.email && !user.verifiedEmail) {
         try {
           const oldVerification = await Verification.findOne({
             payload: user.email
