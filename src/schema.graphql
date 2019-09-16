@@ -84,7 +84,6 @@ type GetMyProfileResponse {
 
 type Query {
   GetMyProfile: GetMyProfileResponse!
-  something: String!
 }
 
 type User {
