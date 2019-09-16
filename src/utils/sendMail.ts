@@ -14,10 +14,10 @@ const sendMail = mail => {
 
 export const sendKeyMail = (fullName: string, email: string, key: string) => {
   const mail = {
-    from: "Prismagram@prismagram.com",
+    from: "Nuber@Nuber.com",
     to: email,
-    subject: "🔒Login Secret for Prismagram🔒",
-    html: `Hello ${fullName}! Your login secret it ✅<b>${key}</b>.<br/>Copy paste on the app/website to log in`
+    subject: "🔒Login Secret for Nuber",
+    html: `Hello <b>${fullName}</b>! Your login secret it ✅<b>${key}</b>.<br/>Copy paste on the app/website to log in`
   };
   return sendMail(mail);
 };
