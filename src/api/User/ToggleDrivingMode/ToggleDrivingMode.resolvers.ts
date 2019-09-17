@@ -1,7 +1,7 @@
 import { ToggleDrivingModeResponse } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import User from "../../../entities/User";
-import { isAuthenticated } from "src/utils/isAuthenticated";
+import { isAuthenticated } from "../../../utils/isAuthenticated";
 
 const resolvers: Resolvers = {
   Mutation: {
