@@ -1,26 +1,20 @@
-import {
-  ReportMovementMutationArgs,
-  ReportMovementResponse
-} from "src/types/graph";
+import { AddPlaceMutationArgs, AddPlaceResponse } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
+import Place from "../../../entities/Place";
 import User from "../../../entities/User";
-import cleanNullArgs from "../../../utils/cleanNullArgs";
 import { isAuthenticated } from "../../../utils/isAuthenticated";
 
 const resolvers: Resolvers = {
   Mutation: {
-    ReportMovement: async (
+    AddPlace: async (
       _,
-      args: ReportMovementMutationArgs,
+      args: AddPlaceMutationArgs,
       { req }
-    ): Promise<ReportMovementResponse> => {
+    ): Promise<AddPlaceResponse> => {
       isAuthenticated(req);
-      const user = req.user;
-      // It's been repeated more than twice.
-      // so make Ftn for this situation
-      const notNull = cleanNullArgs(args);
+      const user: User = req.user;
       try {
-        await User.update({ id: user.id }, { ...notNull });
+        await Place.create({ ...args, user }).save();
         return {
           ok: true,
           error: null
