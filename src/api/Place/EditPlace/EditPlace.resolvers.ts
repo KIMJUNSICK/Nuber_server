@@ -15,6 +15,7 @@ const resolvers: Resolvers = {
       isAuthenticated(req);
       const user: User = req.user;
       const notNull: any = cleanNullArgs(args);
+      delete notNull.placeId;
       try {
         const place = await Place.findOne({ id: args.placeId });
         if (place) {
