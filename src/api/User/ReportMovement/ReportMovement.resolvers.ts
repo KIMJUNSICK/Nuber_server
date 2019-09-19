@@ -12,15 +12,16 @@ const resolvers: Resolvers = {
     ReportMovement: async (
       _,
       args: ReportMovementMutationArgs,
-      { req }
+      { req, pubSub }
     ): Promise<ReportMovementResponse> => {
       isAuthenticated(req);
-      const user = req.user;
+      const user: User = req.user;
       // It's been repeated more than twice.
       // so make Ftn for this situation
       const notNull = cleanNullArgs(args);
       try {
         await User.update({ id: user.id }, { ...notNull });
+        pubSub.publish("driverUpdate", { DriversSubscription: user });
         return {
           ok: true,
           error: null
