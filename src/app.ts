@@ -15,9 +15,15 @@ class App {
     this.app = new GraphQLServer({
       schema,
       context: req => {
+        // here, the req is full request or raw request
+        // not HTTP request
+        const { connection: { context = null } = {} } = req;
+        // {connection : {context = null} = {} } means adding default
+        // Websocket 'connection', not HTTP request
         return {
           req: req.request,
-          pubSub: this.pubSub
+          pubSub: this.pubSub,
+          context
         };
       }
     });
