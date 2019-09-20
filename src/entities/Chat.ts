@@ -1,12 +1,11 @@
 import {
-  Entity,
   BaseEntity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
   CreateDateColumn,
-  OneToMany
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
 } from "typeorm";
-
 import Message from "./Message";
 import User from "./User";
 
