@@ -3,11 +3,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  UpdateDateColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
-  ManyToOne
+  UpdateDateColumn
 } from "typeorm";
-
 import Chat from "./Chat";
 import User from "./User";
 
