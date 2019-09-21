@@ -1,0 +1,9 @@
+type GetRideResponse {
+  ok: Boolean!
+  error: String
+  ride: Ride
+}
+
+type Mutation {
+  GetRide(rideId: Int!): GetRideResponse!
+}
