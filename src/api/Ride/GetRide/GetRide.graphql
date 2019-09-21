@@ -4,6 +4,6 @@ type GetRideResponse {
   ride: Ride
 }
 
-type Mutation {
+type Query {
   GetRide(rideId: Int!): GetRideResponse!
 }

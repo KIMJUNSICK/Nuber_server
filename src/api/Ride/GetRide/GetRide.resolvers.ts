@@ -1,14 +1,14 @@
-import { GetRideMutationArgs, GetRideResponse } from "src/types/graph";
+import { GetRideQueryArgs, GetRideResponse } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import Ride from "../../../entities/Ride";
 import User from "../../../entities/User";
 import { isAuthenticated } from "../../../utils/isAuthenticated";
 
 const resolvers: Resolvers = {
-  Mutation: {
+  Query: {
     GetRide: async (
       _,
-      args: GetRideMutationArgs,
+      args: GetRideQueryArgs,
       { req }
     ): Promise<GetRideResponse> => {
       isAuthenticated(req);
