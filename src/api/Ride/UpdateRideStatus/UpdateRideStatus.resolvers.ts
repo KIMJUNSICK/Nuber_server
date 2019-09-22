@@ -4,6 +4,7 @@ import {
   UpdateRideStatusResponse
 } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
+import Chat from "../../../entities/Chat";
 import Ride from "../../../entities/Ride";
 import { isAuthenticated } from "../../../utils/isAuthenticated";
 
@@ -21,14 +22,21 @@ const resolvers: Resolvers = {
           let ride: Ride | undefined; // share the variable
           // first 'if'
           if (args.status === "ACCEPTED") {
-            ride = await Ride.findOne({
-              id: args.rideId,
-              status: "REQUESTING"
-            });
+            ride = await Ride.findOne(
+              {
+                id: args.rideId,
+                status: "REQUESTING"
+              },
+              { relations: ["passenger"] }
+            );
             if (ride) {
               ride.driver = user;
               user.isTaken = true;
               user.save();
+              await Chat.create({
+                driver: user,
+                passenger: ride.passenger // relation => no error
+              }).save();
             }
           } else {
             ride = await Ride.findOne({

@@ -37,7 +37,8 @@ Server for the (N)Uber Clone Course on Nomad Academy. GraphQL, Typescript, NodeJ
 - [x] Get Nearby Ride Requests
 - [x] Subscribe to Nearby Requests
 - [x] Update Ride Status
-- [ ] Subscribe to Ride Status
+- [x] Subscribe to Ride Status
+- [ ] Create a Chat Room
 - [ ] Get Chat Room Messages
 - [ ] Subscribe to Chat Room Messages
 - [ ] Send a Chat Message
