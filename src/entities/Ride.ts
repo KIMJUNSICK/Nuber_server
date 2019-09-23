@@ -3,11 +3,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from "typeorm";
 import { rideStatus } from "../types/types";
+import Chat from "./Chat";
 import User from "./User";
 
 const ACCEPTED = "ACCEPTED";
@@ -65,6 +68,14 @@ class Ride extends BaseEntity {
 
   @Column({ nullable: true })
   driverId: number;
+
+  @Column({ nullable: true })
+  chatId: number;
+
+  @OneToOne(type => Chat, chat => chat.ride, { nullable: true })
+  // ride have no chat first, status:"REQUESTING" => {nullable : true}
+  @JoinColumn() // add for expressing relationship // master is Ride in 1:1 here
+  chat: Chat;
 
   @CreateDateColumn() createdAt: string;
   @UpdateDateColumn() updatedAt: string;

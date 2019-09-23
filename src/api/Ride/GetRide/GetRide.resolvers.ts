@@ -13,11 +13,13 @@ const resolvers: Resolvers = {
     ): Promise<GetRideResponse> => {
       isAuthenticated(req);
       const user: User = req.user;
+
       try {
         const ride = await Ride.findOne(
           { id: args.rideId },
           { relations: ["passenger", "driver"] }
         ); // relationship which is in prisma to 'computed'
+
         if (ride) {
           // ride.driver.id === user.id
           // database seem to have a hard time dealing with this expression
