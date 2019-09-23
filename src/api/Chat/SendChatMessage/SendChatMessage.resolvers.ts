@@ -13,7 +13,7 @@ const resolvers: Resolvers = {
     SendChatMessage: async (
       _,
       args: SendChatMessageMutaitionArgs,
-      { req }
+      { req, pubSub }
     ): Promise<SendChatMessageResponse> => {
       isAuthenticated(req);
       const user: User = req.user;
@@ -26,6 +26,7 @@ const resolvers: Resolvers = {
               user,
               chat
             }).save();
+            pubSub.publish("newChatMessage", { MessageSubscription: message });
             return {
               ok: true,
               error: null,
