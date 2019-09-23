@@ -13,6 +13,16 @@ type Query {
   GetNearbyDrivers: GetNearbyDriversResponse!
 }
 
+type SendChatMessageResponse {
+  ok: Boolean!
+  error: String
+  message: Message
+}
+
+type Mutaition {
+  SendChatMessage(text: String!, chatId: Int!): SendChatMessageResponse!
+}
+
 type Chat {
   id: Int!
   messages: [Message]!
