@@ -1,5 +1,5 @@
 import {
-  SendChatMessageMutaitionArgs,
+  SendChatMessageMutationArgs,
   SendChatMessageResponse
 } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
@@ -12,7 +12,7 @@ const resolvers: Resolvers = {
   Mutation: {
     SendChatMessage: async (
       _,
-      args: SendChatMessageMutaitionArgs,
+      args: SendChatMessageMutationArgs,
       { req, pubSub }
     ): Promise<SendChatMessageResponse> => {
       isAuthenticated(req);
