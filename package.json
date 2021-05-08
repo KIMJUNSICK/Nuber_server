@@ -35,7 +35,7 @@
     "nodemailer-sendgrid-transport": "^0.2.0",
     "pg": "^7.12.1",
     "twilio": "^3.34.0",
-    "typeorm": "^0.2.18"
+    "typeorm": "^0.2.25"
   },
   "scripts": {
     "pretypes": "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql",
